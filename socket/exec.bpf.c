@@ -38,6 +38,11 @@ int socket_handler(struct __sk_buff *skb)
     if (skb->pkt_type != PACKET_OUTGOING) return 0;
     value = bpf_map_lookup_elem(&my_map, &index);
 
+    /*
+     *
+     * The lookup (from kernel side) bpf_map_lookup_elem() returns a pointer into the array element. 
+     * To avoid data races with userspace reading the value, the API-user must use primitives like __sync_fetch_and_add() when updating the value in-place
+     */
     if (value)  __sync_fetch_and_add(value, skb->len);
 
     return 0;
