@@ -1,2 +1,2 @@
-# linux-observability-with-bpf
-learn linux-observability-with-bpf,api migrate to libbpf
+# ebpf sample
+write some demo ebpf prog for learnning use libbpf
