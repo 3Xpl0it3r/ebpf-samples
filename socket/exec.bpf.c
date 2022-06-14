@@ -2,7 +2,6 @@
 #include <bpf/bpf_helpers.h>
 #include <bpf/bpf_core_read.h>
 #include <bpf/bpf_endian.h>
-#include "exec.h"
 
 
 // copy from uapi/linux/if_ether.h
@@ -41,7 +40,7 @@ int socket_handler(struct __sk_buff *skb)
     /*
      *
      * The lookup (from kernel side) bpf_map_lookup_elem() returns a pointer into the array element. 
-     * To avoid data races with userspace reading the value, the API-user must use primitives like __sync_fetch_and_add() when updating the value in-place
+     * To avoid dataraces with userspace reading the value, the API-user must use primitives like __sync_fetch_and_add() when updating the value in-place
      */
     if (value)  __sync_fetch_and_add(value, skb->len);
 

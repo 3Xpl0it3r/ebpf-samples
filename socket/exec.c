@@ -16,7 +16,6 @@
 #include "bpf/libbpf.h"
 #include "bpf/libbpf_legacy.h"
 #include "exec.skel.h"
-#include "exec.h"
 
 
 static volatile bool exiting = false;
